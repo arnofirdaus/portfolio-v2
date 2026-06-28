@@ -23,7 +23,7 @@ const { title, category, slug, techStack, thumbnail } = Astro.props;
       {
         thumbnail ? (
           <img
-            src={thumbnail}
+            src={`${import.meta.env.BASE_URL}${thumbnail.replace(/^\//, '')}`}
             alt={title}
             class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
             loading="lazy"

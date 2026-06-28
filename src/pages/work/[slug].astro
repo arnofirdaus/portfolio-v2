@@ -30,7 +30,7 @@ const { Content } = await render(project);
         <div class="max-w-[1200px] mx-auto">
           <div class="aspect-21/9 w-full border border-(--color-border) rounded-[4px] overflow-hidden">
             <img
-              src={project.data.thumbnail}
+              src={`${import.meta.env.BASE_URL}${project.data.thumbnail.replace(/^\//, "")}`}
               alt={project.data.title}
               class="w-full h-full object-cover"
             />
