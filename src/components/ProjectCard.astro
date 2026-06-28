@@ -14,7 +14,7 @@ interface Props {
 const { title, category, slug, techStack, thumbnail } = Astro.props;
 ---
 
-<a href={`${import.meta.env.BASE_URL}work/${slug}`} class="block group h-full">
+<a href={`${import.meta.env.BASE_URL}/work/${slug}`} class="block group h-full">
   <div
     class="h-full flex flex-col border border-(--color-border) rounded-[4px] bg-color-canvas overflow-hidden transition-colors hover:bg-(--color-border)/5"
   >
