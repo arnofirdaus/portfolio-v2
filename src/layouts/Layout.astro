@@ -1,0 +1,33 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
+import "../styles/global.css";
+import NavBar from "../components/NavBar.astro";
+import Footer from "../components/Footer.astro";
+import SEO from "../components/SEO.astro";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Arno Firdaus - Portfolio" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<SEO title={title} description={description} />
+	</head>
+	<body class="theme-bone font-sans min-h-screen flex flex-col">
+		<NavBar />
+		<main class="grow">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

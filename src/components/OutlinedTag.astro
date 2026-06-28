@@ -1,0 +1,13 @@
+---
+import MetadataLabel from "./MetadataLabel.astro";
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<span
+  class={`inline-block border border-(--color-border) rounded-md px-[10px] py-[6px] ${className || ""}`}
+>
+  <MetadataLabel><slot /></MetadataLabel>
+</span>

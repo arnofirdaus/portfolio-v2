@@ -1,0 +1,44 @@
+---
+import { SEO as AstroSEO } from "astro-seo";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Arno Firdaus | Software Engineer",
+  description = "Senior Frontend Engineer with 10+ years of experience building scalable web, mobile, and desktop applications.",
+  image = "/og-image.jpg",
+} = Astro.props;
+
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site || "https://arnofirdaus.com",
+);
+---
+
+<AstroSEO
+  title={title}
+  description={description}
+  canonical={canonicalURL.toString()}
+  openGraph={{
+    basic: {
+      title,
+      type: "website",
+      image,
+      url: canonicalURL.toString(),
+    },
+    optional: {
+      description,
+      siteName: "Arno Firdaus Portfolio",
+    },
+  }}
+  twitter={{
+    card: "summary_large_image",
+    title,
+    description,
+    image,
+  }}
+/>

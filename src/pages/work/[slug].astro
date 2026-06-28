@@ -1,0 +1,82 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/Section.astro";
+import DisplayHeadline from "../../components/DisplayHeadline.astro";
+import MetadataLabel from "../../components/MetadataLabel.astro";
+import OutlinedTag from "../../components/OutlinedTag.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({
+    params: { slug: p.id },
+    props: { project: p },
+  }));
+}
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<Layout title={`${project.data.title} | Arno Firdaus`}>
+  <Section class="pt-24 pb-12 px-6 md:px-10">
+    <div class="max-w-[1200px] mx-auto">
+      <DisplayHeadline>{project.data.title}</DisplayHeadline>
+    </div>
+  </Section>
+
+  {
+    project.data.thumbnail && (
+      <Section class="pb-16 px-6 md:px-10">
+        <div class="max-w-[1200px] mx-auto">
+          <div class="aspect-21/9 w-full border border-(--color-border) rounded-[4px] overflow-hidden">
+            <img
+              src={project.data.thumbnail}
+              alt={project.data.title}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </Section>
+    )
+  }
+
+  <Section class="pb-16 px-6 md:px-10">
+    <div
+      class="max-w-[1200px] mx-auto border-t border-b border-(--color-border) py-6 grid grid-cols-2 md:grid-cols-4 gap-6"
+    >
+      <div>
+        <MetadataLabel class="text-color-graphite block mb-1"
+          >CATEGORY</MetadataLabel
+        >
+        <MetadataLabel>{project.data.category}</MetadataLabel>
+      </div>
+      <div>
+        <MetadataLabel class="text-color-graphite block mb-1"
+          >YEAR</MetadataLabel
+        >
+        <MetadataLabel>{project.data.date}</MetadataLabel>
+      </div>
+      {
+        project.data.techStack && (
+          <div class="col-span-2">
+            <MetadataLabel class="text-color-graphite block mb-2">
+              TECHNOLOGIES
+            </MetadataLabel>
+            <div class="flex flex-wrap gap-[10px]">
+              {project.data.techStack.map((tech) => (
+                <OutlinedTag>{tech}</OutlinedTag>
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </Section>
+  <Section class="pb-32 px-6 md:px-10 prose prose-neutral max-w-none">
+    <div
+      class="max-w-[800px] mx-auto font-sans text-body leading-[1.4] tracking-[0.14px] text-color-text"
+    >
+      <Content />
+    </div>
+  </Section>
+</Layout>

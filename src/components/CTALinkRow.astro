@@ -1,0 +1,23 @@
+---
+import MetadataLabel from "./MetadataLabel.astro";
+interface Props {
+  href: string;
+  class?: string;
+  target?: string;
+  rel?: string;
+}
+const { href, class: className, target, rel } = Astro.props;
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class={`flex items-center justify-between h-[60px] border-b border-(--color-border) group w-full ${className || ""}`}
+>
+  <MetadataLabel><slot /></MetadataLabel>
+  <span
+    class="font-mono text-[12px] md:text-subheading text-color-text transition-transform duration-200 group-hover:translate-x-1"
+    >→</span
+  >
+</a>

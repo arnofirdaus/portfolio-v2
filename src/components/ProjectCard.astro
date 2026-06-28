@@ -1,0 +1,63 @@
+---
+import MetadataLabel from "./MetadataLabel.astro";
+import OutlinedTag from "./OutlinedTag.astro";
+
+interface Props {
+  title: string;
+  category: string;
+  slug: string;
+  techStack?: string[];
+  thumbnail?: string;
+}
+const { title, category, slug, techStack, thumbnail } = Astro.props;
+---
+
+<a href={`/work/${slug}`} class="block group h-full">
+  <div
+    class="h-full flex flex-col border border-(--color-border) rounded-[4px] bg-color-canvas overflow-hidden transition-colors hover:bg-(--color-border)/5"
+  >
+    <!-- Image Area (Top) -->
+    <div
+      class="aspect-video w-full border-b border-(--color-border) flex items-center justify-center bg-color-canvas overflow-hidden"
+    >
+      {
+        thumbnail ? (
+          <img
+            src={thumbnail}
+            alt={title}
+            class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+            loading="lazy"
+          />
+        ) : (
+          <h3 class="font-display font-[520] text-[24px] text-color-text opacity-50 px-6 text-center">
+            {title}
+          </h3>
+        )
+      }
+    </div>
+
+    <!-- Content Area (Bottom) -->
+    <div class="p-6 flex flex-col grow">
+      <div class="mb-4">
+        <h3
+          class="font-display font-[520] text-[24px] text-color-text group-hover:opacity-70 transition-opacity mb-1"
+        >
+          {title}
+        </h3>
+        <MetadataLabel>{category}</MetadataLabel>
+      </div>
+
+      {
+        techStack && techStack.length > 0 && (
+          <div class="mt-auto pt-4 flex flex-wrap gap-2">
+            {techStack.map((tech) => (
+              <OutlinedTag class="text-[8px]! py-[4px]! px-[6px]!">
+                {tech}
+              </OutlinedTag>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</a>
