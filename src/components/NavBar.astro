@@ -77,6 +77,7 @@ import MetadataLabel from "./MetadataLabel.astro";
   // Show title immediately on project detail pages (which aren't the root "/")
   const isHomePage =
     window.location.pathname === import.meta.env.BASE_URL ||
+    window.location.pathname === `${import.meta.env.BASE_URL}/` ||
     window.location.pathname === "/index.html";
 
   if (!isHomePage && dynamicTitle) {
