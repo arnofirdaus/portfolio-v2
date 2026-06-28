@@ -1,18 +1,20 @@
 ---
 import MetadataLabel from "./MetadataLabel.astro";
 import OutlinedTag from "./OutlinedTag.astro";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 interface Props {
   title: string;
   category: string;
   slug: string;
   techStack?: string[];
-  thumbnail?: string;
+  thumbnail?: ImageMetadata;
 }
 const { title, category, slug, techStack, thumbnail } = Astro.props;
 ---
 
-<a href={`/work/${slug}`} class="block group h-full">
+<a href={`${import.meta.env.BASE_URL}work/${slug}`} class="block group h-full">
   <div
     class="h-full flex flex-col border border-(--color-border) rounded-[4px] bg-color-canvas overflow-hidden transition-colors hover:bg-(--color-border)/5"
   >
@@ -22,11 +24,13 @@ const { title, category, slug, techStack, thumbnail } = Astro.props;
     >
       {
         thumbnail ? (
-          <img
-            src={`${import.meta.env.BASE_URL}${thumbnail.replace(/^\//, '')}`}
+          <Image
+            src={thumbnail}
             alt={title}
             class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
             loading="lazy"
+            width={800}
+            height={450}
           />
         ) : (
           <h3 class="font-display font-[520] text-[24px] text-color-text opacity-50 px-6 text-center">

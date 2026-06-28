@@ -5,7 +5,10 @@ import MetadataLabel from "./MetadataLabel.astro";
 <header
   class="theme-bone w-full h-16 px-6 md:px-10 flex items-center justify-between sticky top-0 z-50 border-b border-(--color-border)"
 >
-  <a href="/" class="flex items-center gap-2 overflow-hidden h-full">
+  <a
+    href={`${import.meta.env.BASE_URL}`}
+    class="flex items-center gap-2 overflow-hidden h-full"
+  >
     <div
       id="nav-dynamic-title"
       class="h-full flex items-center transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full opacity-0"
@@ -15,9 +18,9 @@ import MetadataLabel from "./MetadataLabel.astro";
   </a>
 
   <div class="hidden md:flex items-center gap-8">
-    <a href="/#about"><MetadataLabel>ABOUT</MetadataLabel></a>
-    <a href="/#work"><MetadataLabel>WORK</MetadataLabel></a>
-    <a href="/#contact"><MetadataLabel>CONTACT</MetadataLabel></a>
+    <a href="#about"><MetadataLabel>EXPERIENCE</MetadataLabel></a>
+    <a href="#work"><MetadataLabel>WORK</MetadataLabel></a>
+    <a href="#contact"><MetadataLabel>CONTACT</MetadataLabel></a>
   </div>
 
   <button id="mobile-menu-btn" class="md:hidden">
@@ -31,17 +34,17 @@ import MetadataLabel from "./MetadataLabel.astro";
 >
   <nav class="flex flex-col">
     <a
-      href="/#about"
+      href={`${import.meta.env.BASE_URL}/#about`}
       class="mobile-nav-link border-b border-(--color-border) py-4"
-      ><MetadataLabel>ABOUT</MetadataLabel></a
+      ><MetadataLabel>EXPERIENCE</MetadataLabel></a
     >
     <a
-      href="/#work"
+      href={`${import.meta.env.BASE_URL}/#work`}
       class="mobile-nav-link border-b border-(--color-border) py-4"
       ><MetadataLabel>WORK</MetadataLabel></a
     >
     <a
-      href="/#contact"
+      href={`${import.meta.env.BASE_URL}/#contact`}
       class="mobile-nav-link border-b border-(--color-border) py-4"
       ><MetadataLabel>CONTACT</MetadataLabel></a
     >
@@ -73,7 +76,7 @@ import MetadataLabel from "./MetadataLabel.astro";
 
   // Show title immediately on project detail pages (which aren't the root "/")
   const isHomePage =
-    window.location.pathname === "/" ||
+    window.location.pathname === import.meta.env.BASE_URL ||
     window.location.pathname === "/index.html";
 
   if (!isHomePage && dynamicTitle) {
