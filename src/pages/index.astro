@@ -20,6 +20,12 @@ experience.sort((a, b) =>
   b.data.startDate.toString().localeCompare(a.data.startDate.toString()),
 );
 
+const formatDate = (dateStr?: string) => {
+  if (!dateStr) return "Present";
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+};
+
 const categorizedSkills = [
   {
     category: "Frontend",
@@ -44,8 +50,7 @@ const categorizedSkills = [
       >
       <div class="mt-8">
         <MetadataLabel
-          >Senior Frontend Engineer — React/Next.js Specialist | Full-Stack &
-          Mobile Development</MetadataLabel
+          >React/Next.js Specialist | Full-Stack & Mobile Development</MetadataLabel
         >
       </div>
     </div>
@@ -69,7 +74,8 @@ const categorizedSkills = [
               <div class="md:col-span-4 flex flex-col gap-1">
                 <MetadataLabel>{exp.data.company}</MetadataLabel>
                 <MetadataLabel class="text-color-graphite">
-                  {exp.data.startDate} — {exp.data.endDate || "PRESENT"}
+                  {formatDate(exp.data.startDate as string)} —{" "}
+                  {formatDate(exp.data.endDate as string)}
                 </MetadataLabel>
               </div>
               <div class="md:col-span-8">
@@ -112,7 +118,7 @@ const categorizedSkills = [
   <Section id="work" class="py-32 px-6 md:px-10">
     <div class="max-w-[1200px] mx-auto">
       <div class="mb-16">
-        <DisplayHeadline as="h2">Projects</DisplayHeadline>
+        <DisplayHeadline as="h2">Featured Work</DisplayHeadline>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
         {
@@ -135,7 +141,7 @@ const categorizedSkills = [
       class="max-w-[1200px] mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-16"
     >
       <div>
-        <DisplayHeadline>Let's Work<br />Together</DisplayHeadline>
+        <DisplayHeadline>Let's Connect</DisplayHeadline>
       </div>
       <div class="flex flex-col border-t border-(--color-border)">
         <CTALinkRow href="mailto:ruaz.arno@gmail.com">Email Me</CTALinkRow>

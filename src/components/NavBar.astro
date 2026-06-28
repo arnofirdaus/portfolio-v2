@@ -19,12 +19,17 @@ import MetadataLabel from "./MetadataLabel.astro";
 
   <div class="hidden md:flex items-center gap-8">
     <a href="#about"><MetadataLabel>EXPERIENCE</MetadataLabel></a>
-    <a href="#work"><MetadataLabel>WORK</MetadataLabel></a>
+    <a href="#work"><MetadataLabel>PROJECTS</MetadataLabel></a>
     <a href="#contact"><MetadataLabel>CONTACT</MetadataLabel></a>
   </div>
 
-  <button id="mobile-menu-btn" class="md:hidden">
-    <MetadataLabel>MENU</MetadataLabel>
+  <button id="mobile-menu-btn" class="md:hidden text-color-text focus:outline-none flex items-center justify-center">
+    <svg id="hamburger-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+    <svg id="close-icon" class="hidden w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
   </button>
 </header>
 
@@ -41,7 +46,7 @@ import MetadataLabel from "./MetadataLabel.astro";
     <a
       href={`${import.meta.env.BASE_URL}/#work`}
       class="mobile-nav-link border-b border-(--color-border) py-4"
-      ><MetadataLabel>WORK</MetadataLabel></a
+      ><MetadataLabel>PROJECTS</MetadataLabel></a
     >
     <a
       href={`${import.meta.env.BASE_URL}/#contact`}
@@ -55,12 +60,19 @@ import MetadataLabel from "./MetadataLabel.astro";
   const btn = document.getElementById("mobile-menu-btn");
   const menu = document.getElementById("mobile-menu");
   const mobileLinks = document.querySelectorAll(".mobile-nav-link");
+  const hamburgerIcon = document.getElementById("hamburger-icon");
+  const closeIcon = document.getElementById("close-icon");
 
   const toggleMenu = () => {
     menu?.classList.toggle("hidden");
-    const label = btn?.querySelector("span");
-    if (label) {
-      label.textContent = menu?.classList.contains("hidden") ? "MENU" : "CLOSE";
+    const isHidden = menu?.classList.contains("hidden");
+    
+    if (isHidden) {
+      hamburgerIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+    } else {
+      hamburgerIcon?.classList.add("hidden");
+      closeIcon?.classList.remove("hidden");
     }
   };
 
